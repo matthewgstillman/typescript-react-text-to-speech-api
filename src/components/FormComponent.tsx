@@ -1,23 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 interface FormData {
   name: string;
   language: string;
+  voice: string; // Added to handle selected voice
 }
 
 const FormComponent = () => {
   const [searchTerm, setSearchTerm] = useState<FormData>({
     name: "",
     language: "en-US",
+    voice: "", // Default empty voice selection
   });
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
-  const speechSynthesis = (searchParameter: string, lang: string) => {
+  // Load available voices when the component mounts
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      setVoices(availableVoices);
+    };
+
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    loadVoices();
+  }, []);
+
+  const speechSynthesis = (
+    searchParameter: string,
+    lang: string,
+    voiceName: string
+  ) => {
     if ("speechSynthesis" in window) {
       let msg = new SpeechSynthesisUtterance();
       msg.text = searchParameter;
       msg.lang = lang;
+      msg.voice = voices.find((voice) => voice.name === voiceName) || voices[0]; // Set selected voice or fallback
       window.speechSynthesis.speak(msg);
     } else {
       alert("Sorry, your browser doesn't support text to speech!");
@@ -36,7 +57,7 @@ const FormComponent = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(`Search Term about to be submitted: ${searchTerm.name}`);
-    speechSynthesis(searchTerm.name, searchTerm.language);
+    speechSynthesis(searchTerm.name, searchTerm.language, searchTerm.voice);
   };
 
   return (
@@ -55,7 +76,7 @@ const FormComponent = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicSelect">
+        <Form.Group className="mb-3" controlId="formBasicSelectLanguage">
           <Form.Label>Select Language</Form.Label>
           <Form.Select
             name="language"
@@ -67,6 +88,20 @@ const FormComponent = () => {
             <option value="es-ES">Spanish (Spain)</option>
             <option value="fr-FR">French</option>
             <option value="de-DE">German</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicSelectVoice">
+          <Form.Label>Select Voice</Form.Label>
+          <Form.Select
+            name="voice"
+            value={searchTerm.voice}
+            onChange={handleChange}
+          >
+            {voices.map((voice, index) => (
+              <option key={index} value={voice.name}>
+                {voice.name} ({voice.lang})
+              </option>
+            ))}
           </Form.Select>
         </Form.Group>
         <Button variant="primary" type="submit">

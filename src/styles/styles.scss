@@ -32,3 +32,20 @@ $light-blue: #71afe5;
     font-weight: 900;
   }
 }
+
+input,
+select,
+textarea,
+.form-control {
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  transition: box-shadow 0.3s, border-color 0.3s;
+
+  &:focus {
+    box-shadow: 10px 6px 5px 0px rgba(0, 0, 0, 0.75);
+    border-color: #71afe5;
+    outline: none;
+  }
+}
