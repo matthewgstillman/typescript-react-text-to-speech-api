@@ -31,10 +31,10 @@ const FormComponent = () => {
 
   return (
     <>
-      <h3 className="formComponentMainHeader">
-        Enter a term you would like to be spoken by Text to Speech in the form
-        below
-      </h3>
+      <h6 className="formComponentMainHeader">
+        Enter a word or phrase you would like to be spoken by Text to Speech in
+        the form below
+      </h6>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Control
@@ -49,6 +49,13 @@ const FormComponent = () => {
           Submit
         </Button>
       </Form>
+      {searchTerm.name ? (
+        <div className="searchTermContainer">
+          <h4>{searchTerm.name}</h4>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

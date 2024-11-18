@@ -11,4 +11,21 @@
 .formComponentMainHeader {
   text-align: center;
   margin-bottom: 25px;
+}
+
+.container {
+  max-width: 1000px;
+  padding: 0 20px;
+}
+
+.searchTermContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  justify-self: center;
+  margin-top: 20px;
+}
+.searchTermContainer h4 {
+  font-weight: 900;
 }/*# sourceMappingURL=styles.css.map */
