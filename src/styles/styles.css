@@ -1,1 +1,14 @@
-/*# sourceMappingURL=styles.css.map */
+.App {
+  background-color: #71afe5;
+  height: 100vh;
+  padding-top: 25px;
+}
+
+.mainHeader {
+  text-align: center;
+}
+
+.formComponentMainHeader {
+  text-align: center;
+  margin-bottom: 25px;
+}/*# sourceMappingURL=styles.css.map */

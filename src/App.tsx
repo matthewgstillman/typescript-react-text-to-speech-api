@@ -1,12 +1,15 @@
 import React from "react";
 import "./styles/styles.css";
 import FormComponent from "./components/FormComponent";
+import { Container } from "react-bootstrap";
 
 const App = () => {
   return (
     <div className="App">
-      <h1>TypeScript React Text to Speech Web API</h1>
-      <FormComponent />
+      <Container>
+        <h1 className="mainHeader">TypeScript React Text to Speech Web API</h1>
+        <FormComponent />
+      </Container>
     </div>
   );
 };
