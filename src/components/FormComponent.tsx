@@ -128,11 +128,6 @@ const FormComponent = () => {
           </Form.Select>
         </Form.Group>
       </Form>
-      {searchTerm.name ? (
-        <div className="searchTermContainer">
-          <h4>{searchTerm.name}</h4>
-        </div>
-      ) : null}
       <div className="controlsContainer">
         <img
           src={`${process.env.PUBLIC_URL}/play-button.svg`}
@@ -147,6 +142,11 @@ const FormComponent = () => {
           onClick={pauseSpeech}
         />
       </div>
+      {searchTerm.name ? (
+        <div className="searchTermContainer">
+          <h4>{searchTerm.name}</h4>
+        </div>
+      ) : null}
     </>
   );
 };
