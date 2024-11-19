@@ -41,12 +41,11 @@ const FormComponent = () => {
     voiceName: string
   ) => {
     if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel(); // Clear any previous utterances
+      window.speechSynthesis.cancel();
       let msg = new SpeechSynthesisUtterance();
       msg.text = searchParameter;
       msg.lang = lang;
       msg.voice = voices.find((voice) => voice.name === voiceName) || voices[0];
-      window.speechSynthesis.speak(msg);
     } else {
       alert("Sorry, your browser doesn't support text to speech!");
     }
@@ -59,11 +58,6 @@ const FormComponent = () => {
   ) => {
     const { name, value } = event.target;
     setSearchTerm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    speechSynthesis(searchTerm.name, searchTerm.language, searchTerm.voice);
   };
 
   const playSpeech = () => {
@@ -91,10 +85,10 @@ const FormComponent = () => {
   return (
     <>
       <h6 className="formComponentMainHeader">
-        Enter a word or phrase you would like to be spoken by Text to Speech in
-        the form below
+        Enter a word or phrase below to be spoken using text-to-speech. Use the
+        play button to hear the term and the pause button to stop it.
       </h6>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Text</Form.Label>
           <Form.Control
@@ -133,9 +127,6 @@ const FormComponent = () => {
             ))}
           </Form.Select>
         </Form.Group>
-        <Button variant="primary" type="submit" className="submitButton">
-          Submit
-        </Button>
       </Form>
       {searchTerm.name ? (
         <div className="searchTermContainer">

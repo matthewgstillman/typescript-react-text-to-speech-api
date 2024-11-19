@@ -2,6 +2,7 @@
   background-color: #71afe5;
   height: 100vh;
   padding-top: 25px;
+  overflow-y: auto;
 }
 
 .mainHeader {
