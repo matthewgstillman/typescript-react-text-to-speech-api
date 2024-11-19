@@ -37,7 +37,7 @@ const FormComponent = () => {
       let msg = new SpeechSynthesisUtterance();
       msg.text = searchParameter;
       msg.lang = lang;
-      msg.voice = voices.find((voice) => voice.name === voiceName) || voices[0]; // Set selected voice or fallback
+      msg.voice = voices.find((voice) => voice.name === voiceName) || voices[0];
       window.speechSynthesis.speak(msg);
     } else {
       alert("Sorry, your browser doesn't support text to speech!");
@@ -55,7 +55,6 @@ const FormComponent = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(`Search Term about to be submitted: ${searchTerm.name}`);
     speechSynthesis(searchTerm.name, searchTerm.language, searchTerm.voice);
   };
 
@@ -67,9 +66,10 @@ const FormComponent = () => {
       </h6>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label>Text</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter text"
+            placeholder="Enter term"
             name="name"
             value={searchTerm.name}
             onChange={handleChange}
@@ -103,7 +103,7 @@ const FormComponent = () => {
             ))}
           </Form.Select>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="submitButton">
           Submit
         </Button>
       </Form>
@@ -112,6 +112,18 @@ const FormComponent = () => {
           <h4>{searchTerm.name}</h4>
         </div>
       ) : null}
+      <div className="controlsContainer">
+        <img
+          src={`${process.env.PUBLIC_URL}/play-button.svg`}
+          alt="Click to play speech"
+          className="playButton"
+        />
+        <img
+          src={`${process.env.PUBLIC_URL}/pause-button.svg`}
+          alt="Click to pause speech"
+          className="pauseButton"
+        />
+      </div>
     </>
   );
 };

@@ -16,8 +16,14 @@ $light-blue: #71afe5;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
   max-width: 1000px;
   padding: 0 20px;
+}
+
+.submitButton {
+  margin-top: 15px;
 }
 
 .searchTermContainer {
@@ -30,6 +36,23 @@ $light-blue: #71afe5;
 
   h4 {
     font-weight: 900;
+  }
+}
+
+.controlsContainer {
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  display: flex;
+  column-gap: 10px;
+  margin-top: 25px;
+  max-width: 300px;
+  padding: 20px;
+
+  .playButton,
+  .pauseButton {
+    height: 50px;
+    width: 50px;
   }
 }
 
