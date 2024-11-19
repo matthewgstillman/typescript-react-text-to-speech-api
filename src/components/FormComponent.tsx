@@ -18,8 +18,15 @@ const FormComponent = () => {
 
   useEffect(() => {
     const loadVoices = () => {
-      const availableVoices = window.speechSynthesis.getVoices();
-      setVoices(availableVoices);
+      let voicesList = window.speechSynthesis.getVoices();
+      if (voicesList.length === 0) {
+        setTimeout(() => {
+          voicesList = window.speechSynthesis.getVoices();
+          setVoices(voicesList);
+        }, 100);
+      } else {
+        setVoices(voicesList);
+      }
     };
 
     if (window.speechSynthesis.onvoiceschanged !== undefined) {
@@ -34,6 +41,7 @@ const FormComponent = () => {
     voiceName: string
   ) => {
     if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel(); // Clear any previous utterances
       let msg = new SpeechSynthesisUtterance();
       msg.text = searchParameter;
       msg.lang = lang;
@@ -56,6 +64,28 @@ const FormComponent = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     speechSynthesis(searchTerm.name, searchTerm.language, searchTerm.voice);
+  };
+
+  const playSpeech = () => {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      let msg = new SpeechSynthesisUtterance();
+      msg.text = searchTerm.name;
+      msg.lang = searchTerm.language;
+      msg.voice =
+        voices.find((voice) => voice.name === searchTerm.voice) || voices[0];
+      window.speechSynthesis.speak(msg);
+    } else {
+      alert("Sorry, your browser doesn't support text to speech!");
+    }
+  };
+
+  const pauseSpeech = () => {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.pause();
+    } else {
+      alert("Sorry, your browser doesn't support text to speech!");
+    }
   };
 
   return (
@@ -117,11 +147,13 @@ const FormComponent = () => {
           src={`${process.env.PUBLIC_URL}/play-button.svg`}
           alt="Click to play speech"
           className="playButton"
+          onClick={playSpeech}
         />
         <img
           src={`${process.env.PUBLIC_URL}/pause-button.svg`}
           alt="Click to pause speech"
           className="pauseButton"
+          onClick={pauseSpeech}
         />
       </div>
     </>
