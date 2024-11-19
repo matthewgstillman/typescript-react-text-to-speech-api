@@ -1,4 +1,3 @@
-import React from "react";
 import "./styles/styles.css";
 import FormComponent from "./components/FormComponent";
 import { Container } from "react-bootstrap";

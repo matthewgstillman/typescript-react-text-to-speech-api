@@ -5,18 +5,17 @@ import Form from "react-bootstrap/Form";
 interface FormData {
   name: string;
   language: string;
-  voice: string; // Added to handle selected voice
+  voice: string;
 }
 
 const FormComponent = () => {
   const [searchTerm, setSearchTerm] = useState<FormData>({
     name: "",
     language: "en-US",
-    voice: "", // Default empty voice selection
+    voice: "",
   });
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
-  // Load available voices when the component mounts
   useEffect(() => {
     const loadVoices = () => {
       const availableVoices = window.speechSynthesis.getVoices();
