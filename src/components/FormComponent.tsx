@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 interface FormData {
   name: string;
-  language: string;
   voice: string;
 }
 
 const FormComponent = () => {
   const [searchTerm, setSearchTerm] = useState<FormData>({
     name: "",
-    language: "en-US",
     voice: "",
   });
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -35,16 +32,11 @@ const FormComponent = () => {
     loadVoices();
   }, []);
 
-  const speechSynthesis = (
-    searchParameter: string,
-    lang: string,
-    voiceName: string
-  ) => {
+  const speechSynthesis = (searchParameter: string, voiceName: string) => {
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       let msg = new SpeechSynthesisUtterance();
       msg.text = searchParameter;
-      msg.lang = lang;
       msg.voice = voices.find((voice) => voice.name === voiceName) || voices[0];
     } else {
       alert("Sorry, your browser doesn't support text to speech!");
@@ -65,7 +57,6 @@ const FormComponent = () => {
       window.speechSynthesis.cancel();
       let msg = new SpeechSynthesisUtterance();
       msg.text = searchTerm.name;
-      msg.lang = searchTerm.language;
       msg.voice =
         voices.find((voice) => voice.name === searchTerm.voice) || voices[0];
       window.speechSynthesis.speak(msg);
@@ -98,20 +89,6 @@ const FormComponent = () => {
             value={searchTerm.name}
             onChange={handleChange}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicSelectLanguage">
-          <Form.Label>Select Language</Form.Label>
-          <Form.Select
-            name="language"
-            value={searchTerm.language}
-            onChange={handleChange}
-          >
-            <option value="en-US">English (US)</option>
-            <option value="en-GB">English (UK)</option>
-            <option value="es-ES">Spanish (Spain)</option>
-            <option value="fr-FR">French</option>
-            <option value="de-DE">German</option>
-          </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicSelectVoice">
           <Form.Label>Select Voice</Form.Label>
