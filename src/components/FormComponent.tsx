@@ -4,12 +4,14 @@ import Form from "react-bootstrap/Form";
 interface FormData {
   name: string;
   voice: string;
+  pitch: number;
 }
 
 const FormComponent = () => {
   const [searchTerm, setSearchTerm] = useState<FormData>({
     name: "",
     voice: "",
+    pitch: 1,
   });
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
@@ -59,6 +61,7 @@ const FormComponent = () => {
       msg.text = searchTerm.name;
       msg.voice =
         voices.find((voice) => voice.name === searchTerm.voice) || voices[0];
+      msg.pitch = searchTerm.pitch;
       window.speechSynthesis.speak(msg);
     } else {
       alert("Sorry, your browser doesn't support text to speech!");
@@ -102,6 +105,35 @@ const FormComponent = () => {
                 {voice.name} ({voice.lang})
               </option>
             ))}
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicSelectPitch">
+          <Form.Label>Select Pitch</Form.Label>
+          <Form.Select
+            name="pitch"
+            value={searchTerm.pitch.toString()}
+            onChange={handleChange}
+          >
+            <option value="0.1">0.1</option>
+            <option value="0.2">0.2</option>
+            <option value="0.3">0.3</option>
+            <option value="0.4">0.4</option>
+            <option value="0.5">0.5</option>
+            <option value="0.6">0.6</option>
+            <option value="0.7">0.7</option>
+            <option value="0.8">0.8</option>
+            <option value="0.9">0.9</option>
+            <option value="1.0">1.0</option>
+            <option value="1.1">1.1</option>
+            <option value="1.2">1.2</option>
+            <option value="1.3">1.3</option>
+            <option value="1.4">1.4</option>
+            <option value="1.5">1.5</option>
+            <option value="1.6">1.6</option>
+            <option value="1.7">1.7</option>
+            <option value="1.8">1.8</option>
+            <option value="1.9">1.9</option>
+            <option value="2.0">2.0</option>
           </Form.Select>
         </Form.Group>
       </Form>
