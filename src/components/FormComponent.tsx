@@ -34,17 +34,6 @@ const FormComponent = () => {
     loadVoices();
   }, []);
 
-  const speechSynthesis = (searchParameter: string, voiceName: string) => {
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      let msg = new SpeechSynthesisUtterance();
-      msg.text = searchParameter;
-      msg.voice = voices.find((voice) => voice.name === voiceName) || voices[0];
-    } else {
-      alert("Sorry, your browser doesn't support text to speech!");
-    }
-  };
-
   const handleChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -153,7 +142,12 @@ const FormComponent = () => {
       </div>
       {searchTerm.name ? (
         <div className="searchTermContainer">
-          <h4>{searchTerm.name}</h4>
+          <h4>
+            <i>"{searchTerm.name}"</i>
+          </h4>
+          <h6>
+            Press the <em>play</em> button to speak this word or phrase
+          </h6>
         </div>
       ) : null}
     </>
