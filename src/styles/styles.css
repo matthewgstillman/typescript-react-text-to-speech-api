@@ -4,34 +4,55 @@
   padding-top: 25px;
   overflow-y: auto;
 }
-
-.mainHeader {
+.App .mainHeader {
   text-align: center;
   margin-bottom: 15px;
 }
-
-.formComponentMainHeader {
+.App .formComponentMainHeader {
   text-align: center;
   margin-bottom: 25px;
 }
-
-.container {
+.App .container {
   display: flex;
   flex-direction: column;
   max-width: 1000px;
   padding: 0 20px;
 }
-
-.errorText {
+.App .errorText {
   color: red;
   font-weight: 700;
+  text-align: center;
+  margin-top: 10px;
 }
-
-.submitButton {
+.App .formGroup {
+  margin-bottom: 20px;
+}
+.App .formGroup .formLabel {
+  font-weight: bold;
+}
+.App .formGroup input,
+.App .formGroup select,
+.App .formGroup textarea,
+.App .formGroup .form-control {
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.App .formGroup input:focus,
+.App .formGroup select:focus,
+.App .formGroup textarea:focus,
+.App .formGroup .form-control:focus {
+  box-shadow: 10px 6px 5px 0px rgba(0, 0, 0, 0.75);
+  border-color: #71afe5;
+  outline: none;
+}
+.App .submitButton {
   margin-top: 15px;
+  align-self: center;
 }
-
-.searchTermContainer {
+.App .searchTermContainer {
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -39,42 +60,36 @@
   justify-self: center;
   margin-top: 20px;
 }
-.searchTermContainer h4 {
+.App .searchTermContainer h4 {
   font-weight: 900;
+  text-align: center;
 }
-
-.controlsContainer {
-  align-items: center;
-  align-self: center;
-  justify-content: center;
+.App .searchTermContainer h6 {
+  font-weight: 400;
+  text-align: center;
+  margin-top: 10px;
+}
+.App .searchTermContainer h6 em {
+  font-style: italic;
+}
+.App .controlsContainer {
   display: flex;
+  align-items: center;
+  justify-content: center;
   -moz-column-gap: 10px;
        column-gap: 10px;
   margin-top: 25px;
   max-width: 300px;
   padding: 20px;
 }
-.controlsContainer .playButton,
-.controlsContainer .pauseButton {
+.App .controlsContainer .playButton,
+.App .controlsContainer .pauseButton {
   height: 50px;
   width: 50px;
+  cursor: pointer;
 }
-
-input,
-select,
-textarea,
-.form-control {
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  transition: box-shadow 0.3s, border-color 0.3s;
-}
-input:focus,
-select:focus,
-textarea:focus,
-.form-control:focus {
-  box-shadow: 10px 6px 5px 0px rgba(0, 0, 0, 0.75);
-  border-color: #71afe5;
-  outline: none;
+.App .controlsContainer .playButton:hover,
+.App .controlsContainer .pauseButton:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
 }/*# sourceMappingURL=styles.css.map */
