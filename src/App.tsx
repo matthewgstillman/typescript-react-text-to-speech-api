@@ -2,7 +2,7 @@ import "./styles/styles.css";
 import FormComponent from "./components/FormComponent";
 import { Container } from "react-bootstrap";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Container>

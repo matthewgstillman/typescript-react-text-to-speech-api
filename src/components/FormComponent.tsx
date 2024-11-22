@@ -7,13 +7,14 @@ interface FormData {
   pitch: number;
 }
 
-const FormComponent = () => {
+const FormComponent: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<FormData>({
     name: "",
     voice: "",
     pitch: 1,
   });
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [errors, setErrors] = useState<string>("");
 
   useEffect(() => {
     const loadVoices = () => {
@@ -45,13 +46,20 @@ const FormComponent = () => {
 
   const playSpeech = () => {
     if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      let msg = new SpeechSynthesisUtterance();
-      msg.text = searchTerm.name;
-      msg.voice =
-        voices.find((voice) => voice.name === searchTerm.voice) || voices[0];
-      msg.pitch = searchTerm.pitch;
-      window.speechSynthesis.speak(msg);
+      if (searchTerm.name.length > 0) {
+        window.speechSynthesis.cancel();
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = searchTerm.name;
+        msg.voice =
+          voices.find((voice) => voice.name === searchTerm.voice) || voices[0];
+        msg.pitch = searchTerm.pitch;
+        window.speechSynthesis.speak(msg);
+        setErrors("");
+      } else {
+        setErrors(
+          "Error - please add a term for the text-to-speech api to speak"
+        );
+      }
     } else {
       alert("Sorry, your browser doesn't support text to speech!");
     }
@@ -82,6 +90,7 @@ const FormComponent = () => {
             onChange={handleChange}
           />
         </Form.Group>
+        {errors ? <h6 className="errorText">{errors}</h6> : ""}
         <Form.Group className="mb-3" controlId="formBasicSelectVoice">
           <Form.Label>Select Voice</Form.Label>
           <Form.Select
