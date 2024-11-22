@@ -19,7 +19,7 @@
   padding: 0 20px;
 }
 .App .errorText {
-  color: red;
+  color: #d64545;
   font-weight: 700;
   text-align: center;
   margin-top: 10px;
@@ -75,6 +75,7 @@
 .App .controlsContainer {
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: center;
   -moz-column-gap: 10px;
        column-gap: 10px;
