@@ -58,9 +58,10 @@
   align-self: center;
   align-items: center;
   justify-self: center;
+  margin-bottom: 50px;
   margin-top: 20px;
 }
-.App .searchTermContainer h4 {
+.App .searchTermContainer p {
   font-weight: 900;
   text-align: center;
 }

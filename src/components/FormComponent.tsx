@@ -151,9 +151,9 @@ const FormComponent: React.FC = () => {
       </div>
       {searchTerm.name ? (
         <div className="searchTermContainer">
-          <h4>
+          <p>
             <i>"{searchTerm.name}"</i>
-          </h4>
+          </p>
           <h6>
             Press the <em>play</em> button to speak this word or phrase
           </h6>
