@@ -137,6 +137,31 @@ const FormComponent: React.FC = () => {
             <option value="2.0">2.0</option>
           </Form.Select>
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicSelectRate">
+          <Form.Label>Select Text Speed</Form.Label>
+          <Form.Select
+            name="rate"
+            value={searchTerm.rate.toString()}
+            onChange={handleChange}
+          >
+            <option value="0.5">0.5</option>
+            <option value="0.6">0.6</option>
+            <option value="0.7">0.7</option>
+            <option value="0.8">0.8</option>
+            <option value="0.9">0.9</option>
+            <option value="1.0">1.0</option>
+            <option value="1.1">1.1</option>
+            <option value="1.2">1.2</option>
+            <option value="1.3">1.3</option>
+            <option value="1.4">1.4</option>
+            <option value="1.5">1.5</option>
+            <option value="1.6">1.6</option>
+            <option value="1.7">1.7</option>
+            <option value="1.8">1.8</option>
+            <option value="1.9">1.9</option>
+            <option value="2.0">2.0</option>
+          </Form.Select>
+        </Form.Group>
       </Form>
       <div className="controlsContainer">
         <img
