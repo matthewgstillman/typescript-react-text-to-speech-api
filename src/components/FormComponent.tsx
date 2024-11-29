@@ -5,6 +5,7 @@ interface FormData {
   name: string;
   voice: string;
   pitch: number;
+  rate: number;
 }
 
 const FormComponent: React.FC = () => {
@@ -12,6 +13,7 @@ const FormComponent: React.FC = () => {
     name: "",
     voice: "",
     pitch: 1,
+    rate: 0.5,
   });
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [errors, setErrors] = useState<string>("");
@@ -53,6 +55,7 @@ const FormComponent: React.FC = () => {
         msg.voice =
           voices.find((voice) => voice.name === searchTerm.voice) || voices[0];
         msg.pitch = searchTerm.pitch;
+        msg.rate = searchTerm.rate;
         window.speechSynthesis.speak(msg);
         setErrors("");
       } else {
